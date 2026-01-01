@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weapons - Free Fire Encyclopedia</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-container">
+
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <div class="logo-icon">FF</div>
+            <span class="logo-text">FREE FIRE</span>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+
+            <!-- Dropdown -->
+            <div class="dropdown-trigger">
+                <button class="nav-link nav-link-active">
+                    Game
+                    <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </button>
+
+                <div class="dropdown-menu">
+                    <a href="weapons.html" class="dropdown-item active">
+                        <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="22" y1="12" x2="18" y2="12"></line>
+                            <line x1="6" y1="12" x2="2" y2="12"></line>
+                            <line x1="12" y1="6" x2="12" y2="2"></line>
+                            <line x1="12" y1="22" x2="12" y2="18"></line>
+                        </svg>
+                        Weapons
+                    </a>
+
+                    <a href="#" class="dropdown-item">
+                        <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                        </svg>
+                        Characters
+                    </a>
+
+                    <a href="#" class="dropdown-item">
+                        <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        Pets
+                    </a>
+
+                    <a href="#" class="dropdown-item">
+                        <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        </svg>
+                        Bundles
+                    </a>
+                </div>
+            </div>
+
+            <a href="#" class="nav-link">News</a>
+            <a href="#" class="nav-link">Events</a>
+            <a href="#" class="nav-link">Media</a>
+            <a href="#" class="nav-link">Universe</a>
+        </nav>
+
+        <!-- Header Right -->
+        <div class="header-right">
+            <div class="search-container">
+                <button class="icon-btn" id="searchToggle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <div class="search-dropdown" id="searchDropdown">
+                    <input type="text" placeholder="Search weapons, characters..." class="search-input">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<!-- Page Layout -->
+<div class="weapons-layout">
+    <aside class="weapon-sidebar" id="weaponSidebar">
+        <div class="sidebar-header">
+            <h2>Weapons</h2>
+            <p>Browse by class</p>
+        </div>
+        <nav class="sidebar-nav" id="sidebarNav"></nav>
+    </aside>
+
+    <main class="weapon-content" id="weaponContent"></main>
+</div>
+
+<script src="weapons-data.js"></script>
+<script src="weapons.js"></script>
+
+</body>
+</html>

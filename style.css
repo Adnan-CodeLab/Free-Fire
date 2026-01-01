@@ -1,0 +1,1510 @@
+/* =========================================
+   FREE FIRE ENCYCLOPEDIA - STYLES
+   ========================================= */
+
+/* CSS Variables */
+:root {
+  /* Colors */
+  --bg-dark: #0a0a0a;
+  --bg-card: #141414;
+  --bg-surface: #1a1a1a;
+  --bg-hover: #1f1f1f;
+  --bg-secondary: #262626;
+
+  --text-primary: #f2f2f2;
+  --text-secondary: #999999;
+  --text-muted: #666666;
+
+  --accent-primary: #dc2626;
+  --accent-glow: #ef4444;
+  --accent-dark: #991b1b;
+
+  --border-color: #2e2e2e;
+  --border-hover: #404040;
+
+  /* Typography */
+  --font-primary: 'Rajdhani', sans-serif;
+  --font-display: 'Orbitron', sans-serif;
+
+  /* Spacing */
+  --header-height: 64px;
+  --sidebar-width: 256px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 300ms ease;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(220, 38, 38, 0.15);
+  --shadow-glow-strong: 0 0 30px rgba(220, 38, 38, 0.25);
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--bg-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--header-height);
+    background-color: rgba(10, 10,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-container{
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-icon{
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: #ffffff;
+    transition: box-shadow var(--transition-normal);
+}
+
+.logo:hover .logo-icon{
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+}
+
+.logo-text{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+@media (max-width:640px){
+    .logo-text{
+        display: none;
+    }
+}
+
+.nav {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+}
+
+@media (min-width:768px){
+    .nav{
+        display: flex;
+    }
+}
+
+.nav-link {
+    position: relative;
+    font-weight: 500;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    transition: color var(--transition-normal);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-primary);
+    transition: width var(--transition-slow);
+}
+
+.nav-link:hover,
+.nav-link-active{
+    color: var(--text-primary);
+}
+
+.nav-link:hover::after,
+.nav-link-active::after{
+    width: 100%;
+}
+
+.chevron-icon{
+    width: 16px;
+    height: 16px;
+}
+
+.dropdown-trigger{
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    margin-top: 0.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all var(--transition-normal);
+    z-index: 50;
+}
+
+.dropdown-trigger:hover .dropdown-menu{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item{
+    display: flex;
+    align-items: center;
+    gap:0.75rem;
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.dropdown-item:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.dropdown-item:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.dropdown-item:hover,
+.dropdown-item.active{
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+}
+
+.dropdown-icon{
+    width: 16px;
+    height: 16px;
+    color: var(--accent-primary);
+}
+
+.header-right{
+    display: flex;
+    align-items: center;
+    grid-area: 0.5rem;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.icon-btn:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.icon-btn svg{
+    width: 20px;
+    height: 20px;
+}
+
+.search-container{
+    position: relative;
+}
+
+.search-dropdown{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    width: 288px;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95);
+    transition: all var(--transition-normal);
+}
+
+.search-dropdown.active{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.search-input{
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color var(--transition-fast);
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-input:focus{
+    border-color:  var(--accent-primary);
+    box-shadow:  0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+/* --- Hero Section --- */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    padding-top: var(--header-height);
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #141414 50%);
+}
+
+.hero-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top, rgba(220, 38, 38, 0.1) 0%, transparent 70%);
+}
+
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(10, 10, 10, 1) 100%);
+}
+
+.hero-content {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 5rem 1rem;
+}
+
+.hero-title {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.hero-title h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.text-white { color: var(--text-primary); }
+.text-primary { color: var(--accent-primary); }
+
+.glow-text {
+    text-shadow: 0 0 10px rgba(220, 38, 38, 0.5), 0 0 20px rgba(220, 38, 38, 0.3);
+}
+
+.hero-subtitle {
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Categories Grid --- */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+    .categories-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+    .categories-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.category-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all var(--transition-slow);
+}
+
+.category-card:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    box-shadow: var(--shadow-glow-strong);
+    transform: translateY(-4px);
+}
+
+.category-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1rem;
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-normal);
+}
+
+.category-card:hover .category-icon {
+    background-color: rgba(220, 38, 38, 0.2);
+}
+
+.category-icon svg {
+    width: 32px;
+    height: 32px;
+    color: var(--accent-primary);
+}
+
+.category-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    transition: color var(--transition-normal);
+}
+
+.category-card:hover h3 { color: var(--accent-primary); }
+
+.category-card p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* --- Secondary Nav --- */
+.secondary-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.secondary-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: all var(--transition-normal);
+}
+
+.secondary-nav-item:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    box-shadow: var(--shadow-glow);
+}
+
+.secondary-nav-item svg {
+    width: 20px;
+    height: 20px;
+    color: var(--accent-primary);
+}
+
+/* --- Floating Orbs --- */
+.floating-orb {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(220, 38, 38, 0.05);
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+.orb-1 {
+    top: 25%;
+    left: 40px;
+    width: 128px;
+    height: 128px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.orb-2 {
+    bottom: 25%;
+    right: 40px;
+    width: 160px;
+    height: 160px;
+    animation: float 3s ease-in-out infinite 1.5s;
+}
+
+.weapons-layout{
+    display: flex;
+    padding-top: var(--header-height);
+    min-height: 100vh;
+}
+
+/* --- Weapons Page Sidebar --- */
+.weapon-sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border-color);
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    position: sticky;
+    top: var(--header-height);
+    flex-shrink: 0;
+}
+
+.weapon-sidebar::-webkit-scrollbar { width: 8px; }
+.weapon-sidebar::-webkit-scrollbar-track { background: var(--bg-dark); }
+.weapon-sidebar::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.sidebar-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.sidebar-nav { padding: 0.5rem 0; }
+
+.sidebar-class {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    border-left: 2px solid transparent;
+    transition: all var(--transition-normal);
+    cursor: pointer;
+    text-align: left;
+}
+
+.sidebar-class:hover, .sidebar-class.active {
+    color: var(--text-primary);
+    background-color: rgba(38, 38, 38, 0.5);
+    border-left-color: var(--accent-primary);
+}
+
+.sidebar-class svg {
+    width: 16px;
+    height: 16px;
+    transition: transform var(--transition-normal);
+}
+
+.sidebar-class.active svg { transform: rotate(90deg); }
+
+.sidebar-weapons {
+    background-color: rgba(38, 38, 38, 0.3);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height var(--transition-slow);
+}
+
+.sidebar-weapons.open { max-height: 500px; }
+
+.sidebar-weapon {
+    display: block;
+    width: 100%;
+    padding: 0.625rem 1rem 0.625rem 2rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    text-align: left;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+
+.sidebar-weapon:hover {
+    color: var(--text-primary);
+    background-color: rgba(38, 38, 38, 0.5);
+}
+
+.sidebar-weapon.active {
+    color: var(--accent-primary);
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+/* --- Main Content & Back Button --- */
+.weapon-content {
+    flex: 1;
+    padding: 2rem;
+    min-height: calc(100vh - var(--header-height));
+}
+
+.content-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.back-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    color: var(--text-primary);
+    transition: background-color var(--transition-fast);
+}
+
+.back-btn:hover { background-color: var(--bg-hover); }
+
+.back-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.content-title h2 {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.content-title p {
+    color: var(--text-secondary);
+}
+
+/* Weapon Class Grid */
+.class-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .class-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .class-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.class-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all var(--transition-slow);
+}
+
+.class-card:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    box-shadow: var(--shadow-glow-strong);
+}
+
+.class-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.class-card-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-normal);
+}
+
+.class-card:hover .class-card-icon {
+    background-color: rgba(220, 38, 38, 0.2);
+}
+
+.class-card-icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--accent-primary);
+}
+
+.class-card-info h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color var(--transition-normal);
+}
+
+.class-card:hover .class-card-info h3 {
+    color: var(--accent-primary);
+}
+
+.class-card-info p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.class-card-weapons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.weapon-tag {
+    padding: 0.25rem 0.5rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    border-radius: 4px;
+}
+
+.weapon-tag.more {
+    color: var(--accent-primary);
+}
+
+/* Weapon Grid */
+.weapon-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .weapon-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .weapon-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.weapon-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition-slow);
+}
+
+.weapon-card:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    box-shadow: var(--shadow-glow-strong);
+}
+
+.weapon-card-image {
+    aspect-ratio: 16/9;
+    background-color: rgba(38, 38, 38, 0.5);
+    overflow: hidden;
+}
+
+.weapon-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+    transition: transform var(--transition-slow);
+}
+
+.weapon-card:hover .weapon-card-image img {
+    transform: scale(1.1);
+}
+
+.weapon-card-info {
+    padding: 1rem;
+}
+
+.weapon-card-info h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color var(--transition-normal);
+}
+
+.weapon-card:hover .weapon-card-info h3 {
+    color: var(--accent-primary);
+}
+
+/* Weapon Detail */
+.weapon-detail {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.weapon-detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .weapon-detail-content {
+        flex-direction: row;
+    }
+}
+
+.weapon-detail-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: rgba(38, 38, 38, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .weapon-detail-image {
+        width: 50%;
+    }
+}
+
+.weapon-detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 2rem;
+}
+
+.weapon-detail-info {
+    flex: 1;
+}
+
+.weapon-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(220, 38, 38, 0.2);
+    color: var(--accent-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.weapon-detail-info h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.weapon-detail-info > p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.weapon-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.stat-box {
+    padding: 0.75rem;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+}
+
+.stat-box span:first-child {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.stat-box span:last-child {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Skins Section */
+.skins-section h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+/* Skins Section */
+.skins-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .skins-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.skin-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition-slow);
+}
+
+.skin-card:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    box-shadow: var(--shadow-glow);
+}
+
+.skin-card-media {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.skin-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+.class-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all var(--transition-slow);
+}
+
+.class-card:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    box-shadow: var(--shadow-glow-strong);
+}
+
+.class-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.class-card-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-normal);
+}
+
+.class-card:hover .class-card-icon {
+    background-color: rgba(220, 38, 38, 0.2);
+}
+
+.class-card-icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--accent-primary);
+}
+
+.class-card-info h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color var(--transition-normal);
+}
+
+.class-card:hover .class-card-info h3 {
+    color: var(--accent-primary);
+}
+
+.class-card-info p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.class-card-weapons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.weapon-tag {
+    padding: 0.25rem 0.5rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    border-radius: 4px;
+}
+
+.weapon-tag.more {
+    color: var(--accent-primary);
+}
+
+/* Weapon Grid */
+.weapon-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .weapon-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .weapon-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.weapon-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition-slow);
+}
+
+.weapon-card:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    box-shadow: var(--shadow-glow-strong);
+}
+
+.weapon-card-image {
+    aspect-ratio: 16/9;
+    background-color: rgba(38, 38, 38, 0.5);
+    overflow: hidden;
+}
+
+.weapon-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+    transition: transform var(--transition-slow);
+}
+
+.weapon-card:hover .weapon-card-image img {
+    transform: scale(1.1);
+}
+
+.weapon-card-info {
+    padding: 1rem;
+}
+
+.weapon-card-info h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color var(--transition-normal);
+}
+
+.weapon-card:hover .weapon-card-info h3 {
+    color: var(--accent-primary);
+}
+
+/* Weapon Detail */
+.weapon-detail {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.weapon-detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .weapon-detail-content {
+        flex-direction: row;
+    }
+}
+
+.weapon-detail-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: rgba(38, 38, 38, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .weapon-detail-image {
+        width: 50%;
+    }
+}
+
+.weapon-detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 2rem;
+}
+
+.weapon-detail-info {
+    flex: 1;
+}
+
+.weapon-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(220, 38, 38, 0.2);
+    color: var(--accent-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.weapon-detail-info h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.weapon-detail-info > p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.weapon-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.stat-box {
+    padding: 0.75rem;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+}
+
+.stat-box span:first-child {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.stat-box span:last-child {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Skins Section */
+.skins-section h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.skins-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .skins-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.skin-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition-slow);
+}
+
+.skin-card:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    box-shadow: var(--shadow-glow);
+}
+
+.skin-card-media {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.skin-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+.skin-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), var(--bg-secondary), rgba(220, 38, 38, 0.2));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.skin-card-scanline {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, rgba(220, 38, 38, 0.1) 50%);
+    background-size: 100% 4px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.skin-card:hover .skin-card-media img {
+    opacity: 0.3;
+}
+
+.skin-card:hover .skin-card-overlay,
+.skin-card:hover .skin-card-scanline {
+    opacity: 1;
+}
+
+.skin-card-info {
+    padding: 0.75rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.skin-card-info h4 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-normal);
+}
+
+.skin-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), var(--bg-secondary), rgba(220, 38, 38, 0.2));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.skin-card-scanline {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, rgba(220, 38, 38, 0.1) 50%);
+    background-size: 100% 4px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.skin-card:hover .skin-card-media img {
+    opacity: 0.3;
+}
+
+.skin-card:hover .skin-card-overlay,
+.skin-card:hover .skin-card-scanline {
+    opacity: 1;
+}
+
+.skin-card-info {
+    padding: 0.75rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.skin-card-info h4 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-normal);
+}
+
+.skin-card:hover .skin-card-info h4 {
+    color: var(--accent-primary);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(220, 38, 38, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.4s ease-out forwards;
+    opacity: 0;
+}
+
+/* Skins Section */
+.skins-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .skins-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.skin-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition-slow);
+}
+
+.skin-card:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    box-shadow: var(--shadow-glow);
+}
+
+.skin-card-media {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.skin-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+.skin-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), var(--bg-secondary), rgba(220, 38, 38, 0.2));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.skin-card-scanline {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, rgba(220, 38, 38, 0.1) 50%);
+    background-size: 100% 4px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.skin-card:hover .skin-card-media img {
+    opacity: 0.3;
+}
+
+.skin-card:hover .skin-card-overlay,
+.skin-card:hover .skin-card-scanline {
+    opacity: 1;
+}
+
+.skin-card-info {
+    padding: 0.75rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.skin-card-info h4 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-normal);
+}
+
+.skin-card:hover .skin-card-info h4 {
+    color: var(--accent-primary);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(220, 38, 38, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.4s ease-out forwards;
+    opacity: 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .weapon-sidebar {
+        position: fixed;
+        left: -100%;
+        top: var(--header-height);
+        height: calc(100vh - var(--header-height));
+        z-index: 50;
+        transition: left var(--transition-slow);
+    }
+
+    .weapon-sidebar.open {
+        left: 0;
+    }
+
+    .weapon-content {
+        width: 100%;
+    }
+}
